@@ -30,9 +30,7 @@ var createAddresses=function(streetArray, cityArray, countyArray){
 // User interface logic
 $(document).ready(function(){
 
-  // contacts and group addresses
-  var contacts=[];
-  var groupAddress;
+
 
   // handling the add addresses click function
   $("#addAddress").click(function(){
@@ -58,10 +56,14 @@ $(document).ready(function(){
     );
     // end of the append method
   });
-
+  var contacts=[];
   //getting input from the usr
   $(".contacts").submit(function(){
     event.preventDefault();
+    contacts=[];
+
+
+    var groupAddress;
     // streets city and county array
     var streets=[];
     var cities=[];
@@ -74,7 +76,7 @@ $(document).ready(function(){
     //new contact
     var newContact= new Contact(firstname,lastname);
     //contacts.push(newContact);
-
+    contacts.push(newContact);
 
     // looping through the streets
     $(".street").each(function(){
@@ -91,10 +93,24 @@ $(document).ready(function(){
 
     groupAddress=createAddresses(streets,cities,counties);
     newContact.addresses.push(groupAddress);
-    contacts.push(newContact);
+
+
+    //displaying contacts
+    contacts.forEach(function (singleContact) {
+      $("#contactList").append("<li>"+singleContact.fullName()+"</li>")
+
+    });
+
+
+    $("li").click(function(){
+
+      console.log(contacts[$("li").index(this)]);
+    });
+
 
 
   });
+
 
 
 
