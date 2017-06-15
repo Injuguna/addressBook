@@ -15,12 +15,24 @@ Contact.prototype.fullName = function () {
   return this.firstname + " " + this.lastname;
 };
 
+//function to generate address objects and store them in an array;
+var createAddresses=function(streetArray, cityArray, countyArray){
+  var groupAddressArray=[];
+
+  for(var i=0; i<=streetArray.length; i++){
+    var newAddress=new Address(streetArray[i],cityArray[i],countyArray[i]);
+    groupAddressArray.push(newAddress);
+  }
+  return groupAddressArray;
+
+}
+
 // User interface logic
 $(document).ready(function(){
 
   // contacts and group addresses
   var contacts=[];
-  var groupAddress=[];
+  var groupAddress;
 
   // handling the add addresses click function
   $("#addAddress").click(function(){
@@ -61,7 +73,7 @@ $(document).ready(function(){
 
     //new contact
     var newContact= new Contact(firstname,lastname);
-    contacts.push(newContact);
+    //contacts.push(newContact);
 
 
     // looping through the streets
@@ -77,11 +89,14 @@ $(document).ready(function(){
       counties.push($(this).val());
     });
 
-  
-
+    groupAddress=createAddresses(streets,cities,counties);
+    newContact.addresses.push(groupAddress);
+    contacts.push(newContact);
 
 
   });
+
+
 
 
 });
