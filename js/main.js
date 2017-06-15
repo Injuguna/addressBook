@@ -2,6 +2,13 @@
 var Contact=function(firstname,lastname){
   this.firstname=firstname;
   this.lastname=lastname;
+  this.addresses=[];
+
+}
+var Address=function(street, city, county){
+  this.street=street;
+  this.city=city;
+  this.county=county;
 }
 
 Contact.prototype.fullName = function () {
@@ -10,6 +17,10 @@ Contact.prototype.fullName = function () {
 
 // User interface logic
 $(document).ready(function(){
+
+  // contacts and group addresses
+  var contacts=[];
+  var groupAddress=[];
 
   // handling the add addresses click function
   $("#addAddress").click(function(){
@@ -39,10 +50,38 @@ $(document).ready(function(){
   //getting input from the usr
   $(".contacts").submit(function(){
     event.preventDefault();
+    // streets city and county array
+    var streets=[];
+    var cities=[];
+    var counties=[];
+
+    // getting user personal details
     var firstname = $("#fname").val();
     var lastname = $("#lname").val();
 
-  })
+    //new contact
+    var newContact= new Contact(firstname,lastname);
+    contacts.push(newContact);
+
+
+    // looping through the streets
+    $(".street").each(function(){
+      streets.push($(this).val());
+    });
+    // looping through the cities
+    $(".city").each(function(){
+      cities.push($(this).val());
+    });
+    // looping through the counties
+    $(".county").each(function(){
+      counties.push($(this).val());
+    });
+
+  
+
+
+
+  });
 
 
 });
