@@ -4,3 +4,9 @@ var Contact=function(firstName,lastName){
   this.lastName=lastName;
   this.addresses=[];
 }
+
+var Address=function (street,city,county) {
+  this.street=street;
+  this.city=city;
+  this.county=county;
+}
