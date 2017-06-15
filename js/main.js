@@ -10,3 +10,7 @@ var Address=function (street,city,county) {
   this.city=city;
   this.county=county;
 }
+
+Contact.prototype.fullName = function () {
+  return this.firstName + " "+ this.lastName;
+};
