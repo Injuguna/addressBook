@@ -36,4 +36,13 @@ $(document).ready(function(){
     // end of the append method
   });
 
+  //getting input from the usr
+  $(".contacts").submit(function(){
+    event.preventDefault();
+    var firstname = $("#fname").val();
+    var lastname = $("#lname").val();
+
+  })
+
+
 });
