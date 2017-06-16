@@ -1,9 +1,12 @@
 //business logic
+
+// create the constructor for the contact
 var Contact=function(firstName,lastName){
   this.firstName=firstName;
   this.lastName=lastName;
   this.addresses=[];
 }
+// create the constructor for the addresses
 
 var Address=function (street,city,county) {
   this.street=street;
@@ -11,10 +14,17 @@ var Address=function (street,city,county) {
   this.county=county;
 }
 
+// create prototype for the full name
+
 Contact.prototype.fullName = function () {
   return this.firstName + " "+ this.lastName;
 };
 
+/*
+Function that takes in 3 arrays for streets cities counties
+loops through them and returns a single array of address objects
+
+*/
 function createAddresses(streets,cities,counties){
   var newAddresses=[];
   for (var i = 0; i <= streets.length; i++) {
@@ -29,12 +39,13 @@ function createAddresses(streets,cities,counties){
 // User interface logic
 
 $(document).ready(function () {
-
+//array to store contact objects
   var contactsList=[];
 
 
   $("#contacts").submit(function(){
     event.preventDefault();
+    //arrays to store the address inputs
     var streets=[];
     var cities=[];
     var counties=[];
@@ -50,8 +61,7 @@ $(document).ready(function () {
     $("#contactList").append("<li>"+newContact.fullName()+"</li>");
 
     //get streets cities and counties
-
-    $(".street").each(function(){
+  $(".street").each(function(){
       streets.push($(this).val())
     });
     $(".city").each(function(){
@@ -62,7 +72,7 @@ $(document).ready(function () {
     });
 
      newContact.addresses=createAddresses(streets,cities,counties);
-
+// Click functions to display contact details
      $("li").click(function(){
        var index=$("li").index(this);
 
